@@ -1,59 +1,98 @@
-html{
-    margin: 10px;
+/* Global styles */
+html {
     font-family: "Inter", sans-serif;
+    scroll-behavior: smooth;
 }
 
-body{
-    background-color: #e1b382;
+body {
+    margin: 0;
+    background-color: #e4e6e9;
+    color: #2d3748;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-header{
-    width: 740px;
+/* Header section */
+header {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 40px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
 }
 
-.page-title{
-    border-radius: 5px 5px 0 0;
-    background: linear-gradient(135deg, #396b78, #2d545e);
-    height: 100px;
+/* Title bar */
+.page-title {
+    background: linear-gradient(135deg, #0077b6, #0096c7);
+    color: #ffffff;
     display: flex;
-    justify-content: space-around;
-    text-align: center;
+    justify-content: space-between;
     align-items: center;
+    padding: 20px 28px;
+    border-radius: 8px 8px 0 0;
 }
 
-.repo-link{
-    background-color: #e1b382;
-    background: linear-gradient(135deg, #e1b382, #987856);
-    box-shadow: 0px 0px 3px black;
-    border-radius: 5px;
-    width: 86px;
-    padding: 10px 10px;
-    margin: auto 0; 
-    display: flex;
-    align-items: center;
+.title{
+    margin-left: 20px;
 }
 
-.page-title a{
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.page-description{
-    background-color: #468494;
-    /* height: 200px; */
-    padding: 16px;
-}
-
-.page-description p{
+.title h1 {
+    font-size: 1.6rem;
     margin: 0;
+}
+.title p{
     font-size: 1.2rem;
+    margin: 0;
 }
 
-.item-one, .item-two, .item-three{
-    border: 1px solid black;
-    height: 100px;
-    width: 740px;
+.repo-link {
+    background: #ffffff;
+    color: #0077b6;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 10px 16px;
+    box-shadow: 0 2px 4px #2f2e2e;
+}
+
+.repo-link:hover {
+    background: #0077b6;
+    color: #ffffff;
+}
+
+/* Description box */
+.page-description {
+    background: #ffffff;
+    padding: 24px 28px;
+    border-radius: 0 0 8px 8px;
+}
+
+.page-description p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Enhancement sections */
+main {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+
+.enhancement {
+    background: #ffffff;
+    margin-top: 12px;
+    border-radius: 8px;
+    padding: 20px 24px;
+}
+
+.enhancement h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #023e8a;
+    font-weight: 600;
 }
