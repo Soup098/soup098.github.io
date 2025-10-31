@@ -16,9 +16,9 @@ body {
 header {
     width: 100%;
     max-width: 800px;
-    margin-top: 40px;
+    margin-top: 20px;
     background: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 1px 1px 4px #959494;
     border-radius: 8px;
 }
 
@@ -71,7 +71,7 @@ header {
 .page-description p {
     margin: 0;
     font-size: 1.05rem;
-    line-height: 1.6;
+    line-height: 1.4;
 }
 
 /* Enhancement section styles*/
@@ -84,6 +84,7 @@ main {
 
 .enhancement {
     background: #ffffff;
+    box-shadow: 1px 1px 4px #959494;
     margin-top: 12px;
     border-radius: 8px;
     padding: 20px 24px;
@@ -92,6 +93,6 @@ main {
 .enhancement h2 {
     margin: 0;
     font-size: 1.25rem;
-    color: #023e8a;
+    color: #0077b6;
     font-weight: 600;
 }
