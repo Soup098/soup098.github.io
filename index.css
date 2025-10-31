@@ -1,0 +1,59 @@
+html{
+    margin: 10px;
+    font-family: "Inter", sans-serif;
+}
+
+body{
+    background-color: #e1b382;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header{
+    width: 740px;
+}
+
+.page-title{
+    border-radius: 5px 5px 0 0;
+    background: linear-gradient(135deg, #396b78, #2d545e);
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+}
+
+.repo-link{
+    background-color: #e1b382;
+    background: linear-gradient(135deg, #e1b382, #987856);
+    box-shadow: 0px 0px 3px black;
+    border-radius: 5px;
+    width: 86px;
+    padding: 10px 10px;
+    margin: auto 0; 
+    display: flex;
+    align-items: center;
+}
+
+.page-title a{
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.page-description{
+    background-color: #468494;
+    /* height: 200px; */
+    padding: 16px;
+}
+
+.page-description p{
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.item-one, .item-two, .item-three{
+    border: 1px solid black;
+    height: 100px;
+    width: 740px;
+}
