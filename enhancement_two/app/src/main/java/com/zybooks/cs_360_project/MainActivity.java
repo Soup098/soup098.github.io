@@ -1,6 +1,8 @@
 package com.zybooks.cs_360_project;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -9,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 
@@ -23,6 +26,10 @@ import java.util.ArrayList;
 - added comments to better understand the code when i return to it later
 ***
 
+*** COMPLETED 11/24/25 *****
+- Added the new ArrayList filteredList to be a stand in for itemList after it has been filtered
+- adjust the initialization of the adapter with the new filteredList, which starts with all of the contents of the itemList
+
  */
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText editItemName, editItemQuantity;
     private Button addItemBtn;
 
+    private ArrayList<Item> filteredList = new ArrayList<>();
+    private EditText searchBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +52,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.itemsRecyclerView);//gets the recycler view from the layout file
 
         //create the adapter for the RecyclerView and passes the itemList and a lambda function for deletion functionality
-        adapter = new ItemAdapter(itemList, item -> {
+        filteredList.addAll(itemList);
+        adapter = new ItemAdapter(filteredList, item -> {
             itemList.remove(item);
+            filteredList.remove(item);
             adapter.notifyDataSetChanged();
         });
 
@@ -56,15 +68,21 @@ public class MainActivity extends AppCompatActivity {
         editItemName = findViewById(R.id.editItemName);
         editItemQuantity = findViewById(R.id.editItemQuantity);
         addItemBtn = findViewById(R.id.addItemBtn);
+        //method for the search bar
+        searchBar = findViewById(R.id.searchBar);
 
         //created an onClickListener for the add items button
         addItemBtn.setOnClickListener(view -> {
             String name = editItemName.getText().toString();
             String quantityString = editItemQuantity.getText().toString();
+
             int quantity = Integer.parseInt(quantityString);
 
             Item newItem = new Item(name, quantity);
+
             itemList.add(newItem);
+
+            filterList(searchBar.getText().toString());
 
             adapter.notifyItemInserted(itemList.size() - 1);
 
@@ -72,5 +90,33 @@ public class MainActivity extends AppCompatActivity {
             editItemName.setText("");
             editItemQuantity.setText("");
         });
+
+
+
+        searchBar.addTextChangedListener((new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterList(s.toString());
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        }));
+    }
+
+    void filterList(String query) {
+        filteredList.clear();
+
+        for (Item item : itemList) {
+            if (item.getName().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+        adapter.notifyDataSetChanged();
     }
 }
