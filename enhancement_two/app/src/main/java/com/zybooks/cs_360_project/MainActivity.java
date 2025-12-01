@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -76,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
             String name = editItemName.getText().toString();
             String quantityString = editItemQuantity.getText().toString();
 
+            //I used this new algorithm function in the addItemBrn listener so that it will execute when adding an item to the list.
+            if(itemExists(name)){
+                Toast.makeText(this, "Item alread on list", Toast.LENGTH_LONG).show();
+                    return;
+            }
+
             int quantity = Integer.parseInt(quantityString);
 
             Item newItem = new Item(name, quantity);
@@ -107,6 +114,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }));
+    }
+
+    private boolean itemExists(String name){ //THis function uses a linear search algorithm to search the existing list
+        for (Item item : itemList){
+            //if the item in item list is the same is the name argument, duplicate was found
+            if(item.getName().equalsIgnoreCase(name)){
+                return true;
+            }
+        }
+        return false;// if it didnt than return false
     }
 
     void filterList(String query) {
