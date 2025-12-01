@@ -30,6 +30,8 @@ import java.util.ArrayList;
 *** COMPLETED 11/24/25 *****
 - Added the new ArrayList filteredList to be a stand in for itemList after it has been filtered
 - adjust the initialization of the adapter with the new filteredList, which starts with all of the contents of the itemList
+- created the itemExists() function to use a linear search algorithm to check if the item being entered is already on this list
+- Added the itemExists() function to the addItemBtn to execute when this button is clicked
 
  */
 
