@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Item"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="54dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/decreaseBtn"
+            android:backgroundTint="@color/secondary_blue"
+            android:text="-" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/itemQuantity"
+            android:text="1"
+            android:padding="8dp" />
+
+        <Button
+            android:layout_width="54dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/increaseBtn"
+            android:backgroundTint="@color/secondary_blue"
+            android:text="+" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/deleteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:layout_marginLeft="10dp"
+        android:padding="4dp"
+        android:backgroundTint="@color/secondary_blue" />
+
+</LinearLayout>
