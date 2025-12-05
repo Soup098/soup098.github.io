@@ -14,18 +14,21 @@ import java.util.ArrayList;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
     private ArrayList<Item> items;
+    private DatabaseHelper dbHelper;
+
     private OnDeleteClickListener deleteListener;
 
     public interface OnDeleteClickListener {
         void onDelete(Item item);
     }
 
-    public ItemAdapter(ArrayList<Item> items, OnDeleteClickListener deleteListener) {
+    // Updated constructor: now accepts the delete listener again
+    public ItemAdapter(ArrayList<Item> items, DatabaseHelper dbHelper, OnDeleteClickListener deleteListener) {
         this.items = items;
+        this.dbHelper = dbHelper;
         this.deleteListener = deleteListener;
     }
 
-    //Inflate the item layout and create the view holder
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,42 +36,47 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         return new ItemViewHolder(view);
     }
 
-    //bind data from items to each view holder
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item item = items.get(position);
 
         holder.itemName.setText(item.getName());
         holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
+
+        // DELETE BUTTON
         holder.deleteBtn.setOnClickListener(view -> deleteListener.onDelete(item));
 
+        // INCREASE BUTTON
         holder.increaseBtn.setOnClickListener(view -> {
-            item.setQuantity(item.getQuantity() + 1);
+            int newQty = item.getQuantity() + 1;
+            item.setQuantity(newQty);
+
+            dbHelper.updateQuantity(item.getId(), newQty); // <-- update DB
             notifyItemChanged(position);
         });
 
+        // DECREASE BUTTON
         holder.decreaseBtn.setOnClickListener(v -> {
             if (item.getQuantity() > 0) {
-                item.setQuantity(item.getQuantity() - 1);
+                int newQty = item.getQuantity() - 1;
+                item.setQuantity(newQty);
+
+                dbHelper.updateQuantity(item.getId(), newQty); // <-- update DB
                 notifyItemChanged(position);
             }
         });
-
     }
 
-    //get the number of items currently in the list
     @Override
     public int getItemCount() {
         return items.size();
     }
 
-    //viewholder class to hold onto references for each item view
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
         TextView itemName;
         TextView itemQuantity;
         Button deleteBtn;
-
         Button increaseBtn;
         Button decreaseBtn;
 

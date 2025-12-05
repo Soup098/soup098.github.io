@@ -33,6 +33,10 @@ import java.util.ArrayList;
 - created the itemExists() function to use a linear search algorithm to check if the item being entered is already on this list
 - Added the itemExists() function to the addItemBtn to execute when this button is clicked
 
+*** COMPLETED 12/3/25****
+- updated the Item class to include item ID to for an index in the database.
+- Created the DatabaseHelper class, which is a helper to extend androids SQLiteOpenHelper abstract class.
+
  */
 
 public class MainActivity extends AppCompatActivity {
@@ -52,11 +56,16 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);// this allows the content to appear underneath android system top bar
         setContentView(R.layout.activity_inventory);// sets starting layout view
 
+        DatabaseHelper dbHelper = new DatabaseHelper(this);//initalization of the database helper class
+        itemList = dbHelper.getAllItems();//loads all of the items from the list on startup
+        filteredList.addAll(itemList);
+
         recyclerView = findViewById(R.id.itemsRecyclerView);//gets the recycler view from the layout file
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));//utilize a layout manager for displaying each item in the Recycler view
 
         //create the adapter for the RecyclerView and passes the itemList and a lambda function for deletion functionality
-        filteredList.addAll(itemList);
-        adapter = new ItemAdapter(filteredList, item -> {
+        adapter = new ItemAdapter(filteredList, dbHelper, item -> {
+            dbHelper.deleteItem(item.getId());
             itemList.remove(item);
             filteredList.remove(item);
             adapter.notifyDataSetChanged();
@@ -64,8 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         //set the adapter for the recyclerView
         recyclerView.setAdapter(adapter);
-        //utilize a layout manager for displaying each item in the Recycler view
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         //grab items from the layout
         editItemName = findViewById(R.id.editItemName);
@@ -81,16 +89,17 @@ public class MainActivity extends AppCompatActivity {
 
             //I used this new algorithm function in the addItemBrn listener so that it will execute when adding an item to the list.
             if(itemExists(name)){
-                Toast.makeText(this, "Item alread on list", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Item already on list", Toast.LENGTH_LONG).show();
                     return;
             }
 
             int quantity = Integer.parseInt(quantityString);
 
-            Item newItem = new Item(name, quantity);
+
+            long insertedId = dbHelper.addItem(name, quantity);
+            Item newItem = new Item((int) insertedId, name, quantity);
 
             itemList.add(newItem);
-
             filterList(searchBar.getText().toString());
 
             adapter.notifyItemInserted(itemList.size() - 1);
