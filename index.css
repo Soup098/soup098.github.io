@@ -83,6 +83,9 @@ main {
 }
 
 .enhancement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: #ffffff;
     box-shadow: 1px 1px 4px #959494;
     margin-top: 12px;
@@ -91,8 +94,27 @@ main {
 }
 
 .enhancement h2 {
-    margin: 0;
-    font-size: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 1.35rem;
     color: #0077b6;
     font-weight: 600;
+}
+
+.enhance_container{
+    display: flex;
+}
+
+.p_container{
+    font-size: 18px;
+    padding: 0 20px 0 20px;
+}
+
+/* Image styling */
+
+.enhancement_one_app_img{
+    width: 242px;
+}
+.code_img{
+    width: 100%;
 }
