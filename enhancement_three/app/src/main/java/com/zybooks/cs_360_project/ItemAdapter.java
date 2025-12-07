@@ -15,14 +15,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     private ArrayList<Item> items;
     private DatabaseHelper dbHelper;
-
     private OnDeleteClickListener deleteListener;
 
     public interface OnDeleteClickListener {
         void onDelete(Item item);
     }
 
-    // Updated constructor: now accepts the delete listener again
     public ItemAdapter(ArrayList<Item> items, DatabaseHelper dbHelper, OnDeleteClickListener deleteListener) {
         this.items = items;
         this.dbHelper = dbHelper;
@@ -43,25 +41,25 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.itemName.setText(item.getName());
         holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
 
-        // DELETE BUTTON
+        // on click for delete button
         holder.deleteBtn.setOnClickListener(view -> deleteListener.onDelete(item));
 
-        // INCREASE BUTTON
+        // on click for the increase button
         holder.increaseBtn.setOnClickListener(view -> {
             int newQty = item.getQuantity() + 1;
             item.setQuantity(newQty);
 
-            dbHelper.updateQuantity(item.getId(), newQty); // <-- update DB
+            dbHelper.updateQuantity(item.getId(), newQty);
             notifyItemChanged(position);
         });
 
-        // DECREASE BUTTON
-        holder.decreaseBtn.setOnClickListener(v -> {
+        // on click for the decrease button. prevents total quantity from going negative with if statement
+        holder.decreaseBtn.setOnClickListener(view -> {
             if (item.getQuantity() > 0) {
                 int newQty = item.getQuantity() - 1;
                 item.setQuantity(newQty);
 
-                dbHelper.updateQuantity(item.getId(), newQty); // <-- update DB
+                dbHelper.updateQuantity(item.getId(), newQty);
                 notifyItemChanged(position);
             }
         });

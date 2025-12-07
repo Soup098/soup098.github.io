@@ -22,9 +22,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+    //creation of the items table with columns for id, name and quantity.
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE "
+        String createTable = "CREATE TABLE "//i formated this this way because it got so long
                 + TABLE_ITEMS + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_NAME + " TEXT NOT NULL, "

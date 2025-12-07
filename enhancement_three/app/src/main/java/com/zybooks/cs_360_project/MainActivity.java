@@ -36,6 +36,8 @@ import java.util.ArrayList;
 *** COMPLETED 12/3/25****
 - updated the Item class to include item ID to for an index in the database.
 - Created the DatabaseHelper class, which is a helper to extend androids SQLiteOpenHelper abstract class.
+- adjusted the adapter to include the database helper functionality
+- made adjustments to the add item button
 
  */
 
@@ -108,8 +110,6 @@ public class MainActivity extends AppCompatActivity {
             editItemName.setText("");
             editItemQuantity.setText("");
         });
-
-
 
         searchBar.addTextChangedListener((new TextWatcher() {
             @Override
