@@ -1,5 +1,6 @@
 package com.zybooks.cs_360_project;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -52,20 +53,25 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Item> filteredList = new ArrayList<>();
     private EditText searchBar;
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);// this allows the content to appear underneath android system top bar
+        // this allows the content to appear underneath android system top bar
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_inventory);// sets starting layout view
 
-        DatabaseHelper dbHelper = new DatabaseHelper(this);//initalization of the database helper class
+        //initialization of the database helper class
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
         itemList = dbHelper.getAllItems();//loads all of the items from the list on startup
         filteredList.addAll(itemList);
 
-        recyclerView = findViewById(R.id.itemsRecyclerView);//gets the recycler view from the layout file
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));//utilize a layout manager for displaying each item in the Recycler view
+        //gets the recycler view from the layout file
+        recyclerView = findViewById(R.id.itemsRecyclerView);
+        //utilize a layout manager for displaying each item in the Recycler view
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //create the adapter for the RecyclerView and passes the itemList and a lambda function for deletion functionality
+        //create the adapter for the RecyclerView. passes the itemList and lambda func for deletion functionality
         adapter = new ItemAdapter(filteredList, dbHelper, item -> {
             dbHelper.deleteItem(item.getId());
             itemList.remove(item);
