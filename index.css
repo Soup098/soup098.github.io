@@ -15,7 +15,7 @@ body {
 /* Header styles */
 header {
     width: 100%;
-    max-width: 800px;
+    max-width: 1080px;
     margin-top: 20px;
     background: #ffffff;
     box-shadow: 1px 1px 4px #959494;
@@ -38,11 +38,11 @@ header {
 }
 
 .title h1 {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     margin: 0;
 }
 .title p{
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     margin: 0;
 }
 
@@ -71,21 +71,24 @@ header {
     align-items: center;
 }
 .self-assessment h2{
-    font-size: 1.35rem;
+    font-size: 1.45rem;
     color: #0077b6;
     font-weight: 600;
 
 }
+.self-assessment h3{
+    font-size: 1.3rem;
+}
 .self-assessment p {
     margin: 0;
-    font-size: 1.05rem;
+    font-size: 1.25rem;
     line-height: 1.4;
 }
 
 /* Enhancement section styles*/
 main {
     width: 100%;
-    max-width: 800px;
+    max-width: 1080px;
     display: flex;
     flex-direction: column;
 }
@@ -114,8 +117,9 @@ main {
 }
 
 .p_container{
-    font-size: 18px;
-    padding: 0 20px 0 20px;
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.4;
 }
 
 /* Image styling */
