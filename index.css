@@ -122,6 +122,10 @@ main {
     line-height: 1.4;
 }
 
+span{
+    font-weight: 600;
+}
+
 /* Image styling */
 
 .enhancement_one_app_img{
