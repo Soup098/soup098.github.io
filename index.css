@@ -60,7 +60,10 @@ header {
     background: #0077b6;
     color: #ffffff;
 }
-
+i{
+    font-size: 1.3rem;
+    margin-right: 5px;
+}
 /* Description box style*/
 .self-assessment {
     background: #ffffff;
@@ -120,6 +123,10 @@ main {
     margin: 0;
     font-size: 1.25rem;
     line-height: 1.4;
+}
+
+span{
+    font-weight: 600;
 }
 
 /* Image styling */
